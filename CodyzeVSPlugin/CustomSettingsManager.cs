@@ -23,7 +23,6 @@ namespace CodyzeVSPlugin
             {
                 Properties.Settings.Default.pathToCPGA = value;
                 Properties.Settings.Default.Save();
-                Properties.Settings.Default.Upgrade();
             }
             catch (ConfigurationErrorsException)
             {
@@ -50,7 +49,6 @@ namespace CodyzeVSPlugin
             {
                 Properties.Settings.Default.commandLineArguments = arguments;
                 Properties.Settings.Default.Save();
-                Properties.Settings.Default.Upgrade();
             }
             catch (ConfigurationErrorsException)
             {
