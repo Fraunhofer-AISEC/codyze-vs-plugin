@@ -47,6 +47,24 @@ namespace CodyzeVSPlugin
             return path;
         }
 
+        public static string ShowFileBrowserForServerLocation(string path)
+        {
+            using (var fileDialog = new OpenFileDialog())
+            {
+                fileDialog.Title = "Select the path to the Codyze LSP server...";
+                fileDialog.Filter = "Batch Files (*.bat)|*.bat";
+                fileDialog.CheckFileExists = true;
+                fileDialog.CheckPathExists = true;
+                fileDialog.Multiselect = false;
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    path = fileDialog.FileName;
+                    CustomSettingsManager.AddUpdatePathSettings(path);
+                }
+            }
+            return path;
+        }
+
         public static string ShowFolderBrowserForMarkFilesLocation(string path)
         {
             using (var folderBrowser = new FolderBrowserDialog())

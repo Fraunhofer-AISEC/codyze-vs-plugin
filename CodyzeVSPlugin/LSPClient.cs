@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using FolderBrowserDialog = System.Windows.Forms.FolderBrowserDialog;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 using DialogResult = System.Windows.Forms.DialogResult;
 using Task = System.Threading.Tasks.Task;
 using CodyzeVSPlugin.RPC;
@@ -16,7 +16,7 @@ namespace CodyzeVSPlugin
     {
         private static LSPClient instance;
         private static readonly object SingletonLock = new object();
-        private string ServerBasePath;
+        private string ServerPath;
         private bool Shutdown = false;
 
         public static LSPClient Instance
@@ -46,8 +46,8 @@ namespace CodyzeVSPlugin
         {
             CheckForServerPath();
             this.ServerProcess.StartInfo.UseShellExecute = false;
-            this.ServerProcess.StartInfo.WorkingDirectory = ServerBasePath;
-            this.ServerProcess.StartInfo.FileName = Path.Combine(ServerBasePath, @"bin\codyze.bat");
+            this.ServerProcess.StartInfo.WorkingDirectory = Path.GetDirectoryName(ServerPath);
+            this.ServerProcess.StartInfo.FileName = ServerPath;
             this.ServerProcess.StartInfo.Arguments = SettingsHelper.CheckCommandLineArguments();
             this.ServerProcess.StartInfo.RedirectStandardOutput = true;
             this.ServerProcess.StartInfo.RedirectStandardInput = true;
@@ -97,7 +97,7 @@ namespace CodyzeVSPlugin
 
         public async Task InitializeAsync(string rootUri)
         {
-            if (Initialized)
+            if (Initialized || !File.Exists(this.ServerPath))
                 return;
 
             this.ServerProcess.Start();
@@ -221,25 +221,17 @@ namespace CodyzeVSPlugin
             CodyzeVSPluginPackage.DebugLine("Exit with code " + ServerProcess.ExitCode);
         }
 
-        public void CheckForServerPath()
+        public bool CheckForServerPath()
         {
-            string path = Properties.Settings.Default.pathToCPGA.ToString();
+            string path = CustomSettingsManager.ReadPathSetting();
 
-            while (!File.Exists(Path.Combine(path, @"bin\codyze.bat")))
+            if (!File.Exists(path))
             {
-                using (var folderBrowser = new FolderBrowserDialog())
-                {
-                    folderBrowser.Description = "Select the path to Codyze (containing the bin/lib folders).";
-                    if (folderBrowser.ShowDialog() == DialogResult.OK)
-                    {
-                        string folderPath = folderBrowser.SelectedPath;
-                        path = folderPath;
-                        CustomSettingsManager.AddUpdatePathSettings(folderPath);
-                    }
-                }
+                path = SettingsHelper.ShowFileBrowserForServerLocation(path);
             }
 
-            this.ServerBasePath = path;
+            this.ServerPath = path;
+            return File.Exists(path);
         }
 
     }
