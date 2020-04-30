@@ -38,19 +38,6 @@ namespace CodyzeVSPlugin
             textBox3.Text = CustomSettingsManager.ReadCommandLineArgumentsSetting();
         }
 
-        private void ShowFolderBrowser()
-        {
-            using (var folderBrowser = new FolderBrowserDialog())
-            {
-                if (folderBrowser.ShowDialog() == DialogResult.OK)
-                {
-                    string folderPath = folderBrowser.SelectedPath;
-                    textBox1.Text = folderPath;
-                    CustomSettingsManager.AddUpdatePathSettings(folderPath);
-                }
-            }
-        }
-
         private void TextBox1_Leave_1(object sender, EventArgs e)
         {
             optionsPage.OptionString = textBox1.Text;
@@ -58,32 +45,12 @@ namespace CodyzeVSPlugin
 
         private void TextBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            ShowFolderBrowser();
+            textBox1.Text = SettingsHelper.ShowFileBrowserForServerLocation(textBox1.Text);
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            ShowFolderBrowser();
-        }
-
-        private void folderBrowserDialog3_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-
-        private void folderBrowserDialog2_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            textBox1.Text = SettingsHelper.ShowFileBrowserForServerLocation(textBox1.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -103,34 +70,9 @@ namespace CodyzeVSPlugin
             
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox2_MouseClick(object sender, MouseEventArgs e)
         {
             MarkFilesDialog();
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MyUserControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void button3_Click(object sender, EventArgs e)

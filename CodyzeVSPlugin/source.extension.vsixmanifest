@@ -5,6 +5,8 @@
         <DisplayName>CodyzeVSPlugin</DisplayName>
         <Description xml:space="preserve">Plugin to use Codyze in Visual Studio.</Description>
         <License>LICENSE.txt</License>
+        <Icon>Resources\CodyzeVSPluginIcon.png</Icon>
+        <PreviewImage>Resources\CodyzeVSPluginIcon.png</PreviewImage>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 17.0)" />

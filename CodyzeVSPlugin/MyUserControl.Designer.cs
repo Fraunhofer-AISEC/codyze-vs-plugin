@@ -30,9 +30,6 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.folderBrowserDialog2 = new System.Windows.Forms.FolderBrowserDialog();
-            this.folderBrowserDialog3 = new System.Windows.Forms.FolderBrowserDialog();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -49,7 +46,6 @@
             this.textBox1.Size = new System.Drawing.Size(277, 20);
             this.textBox1.TabIndex = 0;
             this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TextBox1_MouseClick);
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.Leave += new System.EventHandler(this.TextBox1_Leave_1);
             // 
             // label1
@@ -60,18 +56,6 @@
             this.label1.Size = new System.Drawing.Size(129, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Select the path to Codyze";
-            // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
-            // 
-            // folderBrowserDialog2
-            // 
-            this.folderBrowserDialog2.HelpRequest += new System.EventHandler(this.folderBrowserDialog2_HelpRequest);
-            // 
-            // folderBrowserDialog3
-            // 
-            this.folderBrowserDialog3.HelpRequest += new System.EventHandler(this.folderBrowserDialog3_HelpRequest);
             // 
             // button1
             // 
@@ -100,7 +84,6 @@
             this.textBox2.Size = new System.Drawing.Size(277, 20);
             this.textBox2.TabIndex = 4;
             this.textBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox2_MouseClick);
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
             // 
@@ -110,7 +93,6 @@
             this.label2.Size = new System.Drawing.Size(145, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Select the mark files directory";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox3
             // 
@@ -118,7 +100,6 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(287, 20);
             this.textBox3.TabIndex = 6;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label3
             // 
@@ -128,7 +109,6 @@
             this.label3.Size = new System.Drawing.Size(180, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Specify the command line arguments";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // button3
             // 
@@ -155,7 +135,6 @@
             this.Controls.Add(this.textBox1);
             this.Name = "MyUserControl";
             this.Size = new System.Drawing.Size(356, 186);
-            this.Load += new System.EventHandler(this.MyUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
