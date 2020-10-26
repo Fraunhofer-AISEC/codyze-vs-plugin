@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="CodyzeVSPlugin.32287e24-c849-44e1-97e5-002e80ea3c19" Version="1.0" Language="en-US" Publisher="Fraunhofer AISEC" />
+        <Identity Id="CodyzeVSPlugin.32287e24-c849-44e1-97e5-002e80ea3c19" Version="1.1" Language="en-US" Publisher="Fraunhofer AISEC" />
         <DisplayName>CodyzeVSPlugin</DisplayName>
         <Description xml:space="preserve">Plugin to use Codyze in Visual Studio.</Description>
         <License>LICENSE.txt</License>
