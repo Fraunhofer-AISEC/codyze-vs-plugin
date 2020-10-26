@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - develop
+    tags:
+      - *
 
 env:
   AZURE_WEBAPP_NAME: CodyzeVSPlugin.sln
