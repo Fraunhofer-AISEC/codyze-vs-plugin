@@ -37,18 +37,16 @@ jobs:
     - name: Determine Version
       run: |
         # determine version from tag
-        export VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
-        echo $VERSION
-        if [[ $VERSION != v* ]]
-        then
-          export VERSION=""
+        $version=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
+        if ( $version -notlike 'v*' ) {
+          $version=""
           echo "Building version-less (master or feature branch)"
-        else
+        } else {
           # make version more Java-friendly by dropping the 'v'
-          export VERSION=${VERSION:1:${#VERSION}}
-          echo "Building as ${VERSION}"
-        fi
-        echo "::set-output name=version::$(cat VERSION)"
+          $version=$version.Substring(1)
+          echo "Building as $version"
+        }
+        echo "::set-output name=version::$(echo $version)"
       id: determine_version
 
     - name: Create Release    # Create a draft release. Actual release must be done manually
