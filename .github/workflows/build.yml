@@ -16,14 +16,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Test
-      run: |
-        dir HKLM:\SOFTWARE\Microsoft\MSBuild\ToolsVersions\
-    
     - name: Setup MSBuild path
-      uses: microsoft/setup-msbuild@v1.0.1
-#      with:
-#        vs-version: "[16.4,16.6)"
+      uses: microsoft/setup-msbuild@v1.0.2
     
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
@@ -44,6 +38,7 @@ jobs:
       run: |
         # determine version from tag
         export VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
+        echo $VERSION
         if [[ $VERSION != v* ]]
         then
           export VERSION=""
@@ -53,7 +48,7 @@ jobs:
           export VERSION=${VERSION:1:${#VERSION}}
           echo "Building as ${VERSION}"
         fi
-        echo "##[set-output name=version;]$VERSION"
+        echo "::set-output name=version::$(cat VERSION)"
       id: determine_version
 
     - name: Create Release    # Create a draft release. Actual release must be done manually
