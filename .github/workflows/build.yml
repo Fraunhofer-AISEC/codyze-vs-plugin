@@ -39,6 +39,7 @@ jobs:
     - name: Determine Version
       run: |
         # determine version from tag
+        echo "${GITHUB_REF}"
         $version=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
         if ( $version -notlike 'v*' ) {
           $version=""
