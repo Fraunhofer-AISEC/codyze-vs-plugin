@@ -8,13 +8,15 @@ on:
       - '**'
 
 env:
-  AZURE_WEBAPP_NAME: CodyzeVSPlugin.sln
-  AZURE_WEBAPP_PACKAGE_PATH: 'published'      # set this to the path to your web app project, defaults to the repository root
+  CODYZE_VS_SLN: CodyzeVSPlugin.sln
 
 jobs:
   build:
     name: Build and deploy
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [ windows-2016, windows-2019 ]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
 
@@ -25,10 +27,10 @@ jobs:
       uses: NuGet/setup-nuget@v1.0.2
     
     - name: Restore NuGet packages
-      run: nuget restore ${{ env.AZURE_WEBAPP_NAME }}
+      run: nuget restore ${{ env.CODYZE_VS_SOLN }}
 
     - name: Build
-      run: msbuild ${{ env.AZURE_WEBAPP_NAME }} /p:Configuration=Release
+      run: msbuild ${{ env.CODYZE_VS_SOLN }} /p:Configuration=Release
 
     - name: Publish artifacts
       uses: actions/upload-artifact@v1.0.0
